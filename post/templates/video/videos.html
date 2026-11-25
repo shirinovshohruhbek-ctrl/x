@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Videos</title>
+</head>
+<body>
+    <ul>
+        {% for i in videos %}
+            <li style="margin-bottom: 25px;">
+                <p><strong>Matn:</strong> {{ i.matn }}</p>
+
+                {% if i.rasm %}
+                    <div>
+                        <p>Rasm:</p>
+                        <img src="{{ i.rasm.url }}" alt="rasm" width="320">
+                    </div>
+                {% endif %}
+
+                {% if i.audio %}
+                    <div>
+                        <p>Audio:</p>
+                        <audio controls>
+                            <source src="{{ i.audio.url }}">
+                        </audio>
+                    </div>
+                {% endif %}
+
+                {% if i.musiqa %}
+                    <div>
+                        <p>Musiqa:</p>
+                        <audio controls>
+                            <source src="{{ i.musiqa.url }}">
+                        </audio>
+                    </div>
+                {% endif %}
+
+                {% if i.fayl %}
+                    <div>
+                        <p>Fayl:</p>
+                        <a href="{{ i.fayl.url }}" download>Faylni yuklab olish</a>
+                    </div>
+                {% endif %}
+
+                {% if i.video %}
+                    <div>
+                        <p>Video:</p>
+                        <video width="150" controls>
+                            <source src="{{ i.video.url }}">
+                        </video>
+                    </div>
+                {% endif %}
+
+                {% if not i.rasm and not i.audio and not i.musiqa and not i.fayl and not i.video %}
+                    <span>Hech qanday media fayl yuklanmagan</span>
+                {% endif %}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+
+    <form action="{% url 'create_video' %}">
+        <button>new video</button>
+    </form>
+</body>
+</html>
